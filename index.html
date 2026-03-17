@@ -110,15 +110,6 @@
       transition: background-color var(--transition), border-color var(--transition);
     }
 
-    .sidebar-logo {
-      font-size: 11px;
-      font-weight: 200;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
     /* Navegación */
     .sidebar-nav {
       display: flex;
@@ -309,25 +300,49 @@
       border-bottom-color: var(--text);
     }
 
-    /* Panel "Sobre Mí" */
-    .hero-about {
-      padding-top: 14px;
+    /* Video en home */
+    .hero-video-wrap {
       opacity: 0;
       animation: fadeInUp 1.1s ease 0.6s forwards;
+      display: flex;
+      justify-content: flex-end; /* empuja el video hacia la derecha */
     }
 
-    .hero-about .about-label {
-      font-size: 10px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      padding-bottom: 20px;
+    .hero-video {
+      width: 85%;
+      height: auto;
+      display: block;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+    }
+
+    body.light-mode .hero-video {
+      border-color: rgba(0, 0, 0, 0.75);
+    }
+
+    /* =============================================
+       SECCIÓN ABOUT
+    ============================================= */
+    #about {
       border-top: 1px solid var(--border);
-      padding-top: 20px;
-      margin-bottom: 24px;
     }
 
-    .hero-about p {
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-heading {
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight: 100;
+      letter-spacing: -0.01em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .about-col-right p {
       font-size: 13px;
       color: var(--text-muted);
       line-height: 1.85;
@@ -335,220 +350,146 @@
       font-weight: 300;
     }
 
+    .about-col-right p:last-child {
+      margin-bottom: 0;
+    }
+
     /* =============================================
-       SECCIÓN WORKS
+       SECCIÓN WORKS — fila horizontal texto + imagen
     ============================================= */
     #works {
       border-top: 1px solid var(--border);
     }
 
-    .works-grid {
+    /* Cada fila de obra */
+    .artwork-item {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
+      grid-template-columns: 2fr 3fr;
+      gap: 60px;
+      align-items: center;
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border);
+      transition: border-color var(--transition);
+      /* Animación de entrada al scroll */
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease,
+                  border-color var(--transition);
     }
 
-    .work-card {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 4 / 3;
-      background-color: #111;
+    .artwork-item.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .work-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.7s ease, filter 0.7s ease;
-      filter: brightness(0.85);
-    }
-
-    .work-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+    /* ── Info — columna izquierda ── */
+    .artwork-info {
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 30px;
-      opacity: 0;
-      transition: opacity 0.45s ease;
+      gap: 4px;
     }
 
-    .work-card:hover img {
-      transform: scale(1.05);
-      filter: brightness(0.6);
-    }
-
-    .work-card:hover .work-overlay {
-      opacity: 1;
-    }
-
-    .work-title {
-      font-size: 16px;
-      font-weight: 200;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #fff;
-      margin-bottom: 8px;
-      transform: translateY(12px);
-      transition: transform 0.45s ease;
-    }
-
-    .work-card:hover .work-title {
-      transform: translateY(0);
-    }
-
-    .work-desc {
+    .artwork-number {
+      display: block;
       font-size: 11px;
-      color: rgba(255,255,255,0.6);
-      letter-spacing: 0.12em;
-      transform: translateY(12px);
-      transition: transform 0.45s ease 0.05s;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
     }
 
-    .work-card:hover .work-desc {
-      transform: translateY(0);
+    .artwork-name {
+      font-size: clamp(20px, 2.8vw, 36px);
+      font-weight: 200;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 14px;
     }
 
-    .work-placeholder {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    .artwork-year,
+    .artwork-dimensions {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .artwork-materials {
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-top: 6px;
+    }
+
+    /* Bloque doble (díptico): dos columnas de info lado a lado */
+    .artwork-info-double {
+      display: flex;
+      gap: 48px;
+    }
+
+    /* ── Visual — columna derecha ── */
+    .artwork-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .artwork-visual-wrap {
+      position: relative;
+      display: inline-flex;
+      max-width: 100%;
+      overflow: hidden;
+      background-color: #0d0d0d;
+    }
+
+    .artwork-img {
+      max-height: 65vh;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    /* Placeholder mientras no hay imagen */
+    .artwork-ph {
+      max-height: 65vh;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      background: linear-gradient(135deg, #181818 0%, #0d0d0d 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #444;
+      color: #2a2a2a;
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
+      /* aspect-ratio definido inline en cada elemento */
     }
 
-    /* =============================================
-       SECCIÓN GALLERY
-    ============================================= */
-    #gallery {
-      border-top: 1px solid var(--border);
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 1;
-      background-color: #0d0d0d;
-      cursor: none;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s ease, filter 0.6s ease;
-      filter: brightness(0.9);
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.06);
-      filter: brightness(0.65);
-    }
-
-    .gallery-overlay {
+    /* Overlay oscuro semitransparente al hover */
+    .artwork-hover-overlay {
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: rgba(0, 0, 0, 0.52);
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
     }
 
-    .gallery-item:hover .gallery-overlay {
+    .artwork-visual-wrap:hover .artwork-img,
+    .artwork-visual-wrap:hover .artwork-ph {
+      transform: scale(1.03);
+      filter: brightness(0.6);
+    }
+
+    .artwork-visual-wrap:hover .artwork-hover-overlay {
       opacity: 1;
-    }
-
-    .gallery-zoom-icon {
-      width: 36px;
-      height: 36px;
-      border: 1px solid rgba(255,255,255,0.5);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .gallery-zoom-icon svg {
-      width: 14px;
-      height: 14px;
-      stroke: white;
-      fill: none;
-      stroke-width: 1.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .gallery-placeholder {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #181818 0%, #0a0a0a 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #333;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    /* =============================================
-       LIGHTBOX
-    ============================================= */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-    }
-
-    .lightbox.active {
-      display: flex;
-    }
-
-    .lightbox-img {
-      max-width: 90vw;
-      max-height: 85vh;
-      object-fit: contain;
-      animation: lightboxIn 0.35s ease;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 30px;
-      right: 40px;
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      cursor: none;
-      transition: color 0.3s ease;
-      background: none;
-      border: none;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .lightbox-close:hover {
-      color: #fff;
     }
 
     /* =============================================
@@ -583,11 +524,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-    }
-
-    @keyframes lightboxIn {
-      from { opacity: 0; transform: scale(0.96); }
-      to   { opacity: 1; transform: scale(1); }
     }
 
     /* =============================================
@@ -643,9 +579,35 @@
         font-size: clamp(52px, 15vw, 90px);
       }
 
-      .works-grid { grid-template-columns: 1fr; }
+      /* Works en mobile: columna única, imagen primero */
+      .artwork-item {
+        grid-template-columns: 1fr;
+        padding: 60px 0;
+        gap: 32px;
+      }
 
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .artwork-visual { order: -1; }
+
+      .artwork-info-double {
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .artwork-img,
+      .artwork-ph {
+        max-height: 55vw;
+        width: 100%;
+        height: auto;
+      }
+
+      .hero-video {
+        width: 100%;
+      }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
 
       .theme-toggle {
         top: 16px;
@@ -661,8 +623,110 @@
       }
     }
 
-    @media (max-width: 500px) {
-      .gallery-grid { grid-template-columns: 1fr; }
+    /* =============================================
+       SECCIÓN MEYZINE
+    ============================================= */
+    .meyzine-section {
+      margin-left: var(--sidebar-width);
+      border-top: 1px solid var(--border);
+      padding: 100px 80px 100px 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: border-color var(--transition);
+    }
+
+    .meyzine-title {
+      font-size: clamp(48px, 7vw, 90px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 18px;
+      transition: color var(--transition);
+    }
+
+    .meyzine-subtitle {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      transition: color var(--transition);
+    }
+
+    .meyzine-form {
+      display: flex;
+      width: 100%;
+      max-width: 540px;
+      gap: 0;
+    }
+
+    .meyzine-input {
+      flex: 1;
+      padding: 14px 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      background-color: #d0d0d0;
+      border: none;
+      outline: none;
+      color: #111;
+      border-radius: 0;
+      transition: background-color 0.3s ease;
+    }
+
+    body.light-mode .meyzine-input {
+      background-color: #e0e0dc;
+      color: #111;
+    }
+
+    .meyzine-input::placeholder {
+      color: #888;
+    }
+
+    .meyzine-input:focus {
+      background-color: #bebebe;
+    }
+
+    body.light-mode .meyzine-input:focus {
+      background-color: #cececa;
+    }
+
+    .meyzine-btn {
+      padding: 14px 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      background-color: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: 0;
+      cursor: none;
+      transition: background-color var(--transition), color var(--transition),
+                  opacity 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .meyzine-btn:hover {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 900px) {
+      .meyzine-section {
+        margin-left: 0;
+        padding: 80px 24px;
+      }
+
+      .meyzine-form {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
@@ -683,13 +747,14 @@
     <nav class="sidebar-nav" aria-label="Navegación principal">
       <a href="#home"    class="nav-link active" data-section="home">Inicio</a>
       <a href="#works"   class="nav-link"         data-section="works">Trabajos</a>
+      <a href="#about"   class="nav-link"         data-section="about">Sobre Mi</a>
     </nav>
 
     <!-- Redes sociales -->
     <div class="sidebar-social">
 
       <!-- Reemplazá el href con la URL real de Google Maps de tu estudio -->
-      <a href="https://maps.google.com" target="_blank" rel="noopener" class="social-link" aria-label="Ubicación del estudio">
+      <a href="https://www.google.com/maps/search/Av.+Alvarez+Thomas+2318+CABA+Argentina" target="_blank" rel="noopener" class="social-link" aria-label="Ubicación del estudio">
         <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
           <circle cx="12" cy="9" r="2.5"/>
@@ -698,7 +763,7 @@
       </a>
 
       <!-- Reemplazá el href con tu cuenta de Instagram real -->
-      <a href="https://instagram.com/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+      <a href="https://instagram.com/oumaigodismey" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
@@ -708,7 +773,7 @@
       </a>
 
       <!-- Reemplazá con el email real de contacto -->
-      <a href="mailto:contacto@ejemplo.com" class="social-link" aria-label="Email">
+      <a href="mailto:dosmey@yahoo.com" class="social-link" aria-label="Email">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
           <polyline points="22,6 12,13 2,6"/>
@@ -742,30 +807,22 @@
           <p class="hero-subtitle">Artista Visual / Pintor</p>
 
           <!-- Reemplazá con el email real -->
-          <a href="mailto:contacto@ejemplo.com" class="hero-email">contacto@ejemplo.com</a>
+          <a href="mailto:dosmey@yahoo.com" class="hero-email">dosmey@yahoo.com</a>
         </div>
 
-        <!-- Columna derecha: Sobre mí -->
-        <div class="hero-about">
-          <p class="about-label">Sobre mí</p>
-
-          <!-- Reemplazá estos párrafos con la bio real del artista -->
-          <p>
-            Mariano Yoraillh es un artista visual y pintor argentino cuya obra explora
-            la tensión entre la forma y el vacío, la luz y la oscuridad. Con más de
-            una década de trayectoria, su trabajo ha sido exhibido en galerías de
-            Buenos Aires, Montevideo y Madrid.
-          </p>
-          <p>
-            Su práctica pictórica se nutre de referencias filosóficas y poéticas,
-            construyendo series que dialogan con la memoria colectiva y la experiencia
-            íntima del cuerpo en el espacio.
-          </p>
-          <p>
-            Actualmente trabaja desde su estudio en Buenos Aires y acepta
-            encargos de obras únicas y proyectos de arte para espacios públicos
-            y privados.
-          </p>
+        <!-- Columna derecha: video -->
+        <div class="hero-video-wrap">
+          <video
+            class="hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            aria-label="Video presentación de Mariano Yoraillh"
+          >
+            <!-- Archivo detectado en assets/videos/ -->
+            <source src="assets/videos/Video Inicio.mp4" type="video/mp4" />
+          </video>
         </div>
 
       </div>
@@ -775,120 +832,318 @@
     <section id="works" class="section">
       <p class="section-label">Trabajos</p>
 
-      <div class="works-grid">
-        <!--
-          CÓMO AGREGAR IMÁGENES:
-          Reemplazá cada <div class="work-placeholder"> por:
-          <img src="assets/images/NOMBRE-ARCHIVO.jpg" alt="Título de la obra">
-          y editá el título y la descripción de la obra.
-        -->
+      <div class="works-list">
 
-        <div class="work-card">
-          <div class="work-placeholder">Imagen 1</div>
-          <div class="work-overlay">
-            <h3 class="work-title">Serie Umbral</h3>
-            <!-- Reemplazá técnica y año -->
-            <p class="work-desc">Óleo sobre tela — 2024</p>
+        <!-- ── 01 YEAH MANJA ─────────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">01</span>
+            <h3 class="artwork-name">Yeah Manja</h3>
+            <span class="artwork-year">2013</span>
+            <span class="artwork-dimensions">220×80 cm</span>
+            <span class="artwork-materials">Acrylic, ink, laquer and spray paint on wood</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/YEAHMAN_2.png" alt="Yeah Manja" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
           </div>
         </div>
 
-        <div class="work-card">
-          <div class="work-placeholder">Imagen 2</div>
-          <div class="work-overlay">
-            <h3 class="work-title">Fragmentos</h3>
-            <p class="work-desc">Técnica mixta — 2023</p>
+        <!-- ── 02 SI ──────────────────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">02</span>
+            <h3 class="artwork-name">Si</h3>
+            <span class="artwork-year">2014</span>
+            <span class="artwork-dimensions">220×160 cm</span>
+            <span class="artwork-materials">Acrylic, ink, laquer, resin and spray paint on wood</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/SI_2.png" alt="Si" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
           </div>
         </div>
 
-        <div class="work-card">
-          <div class="work-placeholder">Imagen 3</div>
-          <div class="work-overlay">
-            <h3 class="work-title">Residuo</h3>
-            <p class="work-desc">Acrílico sobre lino — 2023</p>
+        <!-- ── 03 QUIXOTE / SANXO — díptico ──────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">03</span>
+            <!-- Info doble: dos bloques lado a lado -->
+            <div class="artwork-info-double">
+              <div>
+                <h3 class="artwork-name">Quixote</h3>
+                <span class="artwork-year">2020</span>
+                <span class="artwork-dimensions">170×80 cm</span>
+                <span class="artwork-materials">Acrílico, carbonilla, aerosol, marcadores y acuarela sobre papel troquelado</span>
+              </div>
+              <div>
+                <h3 class="artwork-name">Sanxo</h3>
+                <span class="artwork-year">S/F</span>
+                <span class="artwork-dimensions">120×80 cm</span>
+                <span class="artwork-materials">Acrílico, carbonilla, aerosol, marcadores y acuarela sobre papel troquelado</span>
+              </div>
+            </div>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/quixote_2.png" alt="Quixote y Sanxo" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
           </div>
         </div>
 
-        <div class="work-card">
-          <div class="work-placeholder">Imagen 4</div>
-          <div class="work-overlay">
-            <h3 class="work-title">Palimpsesto</h3>
-            <p class="work-desc">Óleo sobre madera — 2022</p>
+        <!-- ── 04 HALCONES Y PALOMAS ──────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">04</span>
+            <h3 class="artwork-name">Halcones y Palomas</h3>
+            <span class="artwork-year">2016</span>
+            <span class="artwork-dimensions">150×150 cm</span>
+            <span class="artwork-materials">Acrylic, ink, laquer, resin, plaster and spray paint on wood</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/HALCONES_2.png" alt="Halcones y Palomas" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 05 FOLLOW ──────────────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">05</span>
+            <h3 class="artwork-name">Follow</h3>
+            <span class="artwork-year">2016</span>
+            <span class="artwork-dimensions">220×160 cm</span>
+            <span class="artwork-materials">Acrylic, ink, laquer, resin, plaster and spray paint on wood</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/FOLLOW_2.png" alt="Follow" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 06 EL OUT ───────────────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">06</span>
+            <h3 class="artwork-name">El Out</h3>
+            <span class="artwork-year">2020 · /Cuarentena/</span>
+            <span class="artwork-dimensions">175×75 cm</span>
+            <span class="artwork-materials">Acrylic, ink, laquer, resin, plaster and spray paint on wood panel</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/EL_OUT_2.png" alt="El Out" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 07 DISTANT ─────────────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">07</span>
+            <h3 class="artwork-name">Distant</h3>
+            <span class="artwork-year">S/F</span>
+            <span class="artwork-materials">Acrylic, ink, laquer, plaster and spray paint on cement place</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/DISTANT_2.png" alt="Distant" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 08 SERIE CAPTCHA ───────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">08</span>
+            <h3 class="artwork-name">Serie Captcha</h3>
+            <span class="artwork-year">04.A0</span>
+            <span class="artwork-dimensions">120×150 cm</span>
+            <span class="artwork-materials">Acrylic, ink and spray paint on wood</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/CAPTCHA_2.png" alt="Serie Captcha" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 09 CABECERA ────────────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">09</span>
+            <h3 class="artwork-name">Cabecera</h3>
+            <span class="artwork-year">2022</span>
+            <span class="artwork-dimensions">300×120 cm</span>
+            <span class="artwork-materials">Acrílico, carbonilla, aerosol, marcadores, enduido sobre 14 lienzos unidos</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/CABECERA__2.png" alt="Cabecera" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 10 R12 / EL MUELLE ─────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">10</span>
+            <h3 class="artwork-name">R12 / El Muelle</h3>
+            <span class="artwork-year">2024–25</span>
+            <span class="artwork-dimensions">90×60 cm</span>
+            <span class="artwork-materials">Acrílico, lápiz negro, aerosol, marcadores, acuarela y laca sobre papel</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/BITACORAS_2.png" alt="R12 / El Muelle" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 11 ANIS ────────────────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">11</span>
+            <h3 class="artwork-name">Anis</h3>
+            <span class="artwork-year">2016</span>
+            <span class="artwork-dimensions">120×150 cm</span>
+            <span class="artwork-materials">Acrylic, ink, laquer and spray paint on wood</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/ANIS_2.png" alt="Anis" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 12 MAR PROPIO ──────────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">12</span>
+            <h3 class="artwork-name">Mar Propio</h3>
+            <span class="artwork-year">2019</span>
+            <span class="artwork-dimensions">220×160 cm</span>
+            <span class="artwork-materials">Acrylic, ink, laquer, resin, plaster and spray paint on wood</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/MAR_PROPIO_2.png" alt="Mar Propio" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 13 AD ANTES ────────────────────────────────────────── -->
+        <div class="artwork-item">
+          <div class="artwork-info">
+            <span class="artwork-number">13</span>
+            <h3 class="artwork-name">Ad Antes</h3>
+            <span class="artwork-year">2019</span>
+            <span class="artwork-dimensions">110×80 cm</span>
+            <span class="artwork-materials">Acrylic, ink, laquer, resin, plaster and spray paint on wood</span>
+          </div>
+          <div class="artwork-visual">
+            <div class="artwork-visual-wrap">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/AD_ANTES_2.png" alt="Ad Antes" loading="lazy">
+              <div class="artwork-hover-overlay"></div>
+            </div>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ─────────── GALLERY ─────────── -->
-    <section id="gallery" class="section">
-      <p class="section-label">Gallery</p>
+    <!-- ─────────── ABOUT ─────────── -->
+    <section id="about" class="section">
+      <p class="section-label">Sobre Mi</p>
 
-      <div class="gallery-grid">
-        <!--
-          CÓMO AGREGAR IMÁGENES A LA GALERÍA:
-          1. Reemplazá <div class="gallery-placeholder"> por:
-             <img src="assets/images/galeria1.jpg" alt="Nombre de la obra">
-          2. Actualizá data-src con la misma ruta de imagen para el lightbox.
-        -->
+      <div class="about-inner">
 
-        <div class="gallery-item" data-src="assets/images/galeria1.jpg" tabindex="0" role="button" aria-label="Ver obra 1 ampliada">
-          <div class="gallery-placeholder">Obra 1</div>
-          <div class="gallery-overlay">
-            <div class="gallery-zoom-icon">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-            </div>
-          </div>
+        <div class="about-col-left">
+          <h2 class="about-heading">Mariano<br>Yoraillh</h2>
         </div>
 
-        <div class="gallery-item" data-src="assets/images/galeria2.jpg" tabindex="0" role="button" aria-label="Ver obra 2 ampliada">
-          <div class="gallery-placeholder">Obra 2</div>
-          <div class="gallery-overlay">
-            <div class="gallery-zoom-icon">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-src="assets/images/galeria3.jpg" tabindex="0" role="button" aria-label="Ver obra 3 ampliada">
-          <div class="gallery-placeholder">Obra 3</div>
-          <div class="gallery-overlay">
-            <div class="gallery-zoom-icon">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-src="assets/images/galeria4.jpg" tabindex="0" role="button" aria-label="Ver obra 4 ampliada">
-          <div class="gallery-placeholder">Obra 4</div>
-          <div class="gallery-overlay">
-            <div class="gallery-zoom-icon">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-src="assets/images/galeria5.jpg" tabindex="0" role="button" aria-label="Ver obra 5 ampliada">
-          <div class="gallery-placeholder">Obra 5</div>
-          <div class="gallery-overlay">
-            <div class="gallery-zoom-icon">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-src="assets/images/galeria6.jpg" tabindex="0" role="button" aria-label="Ver obra 6 ampliada">
-          <div class="gallery-placeholder">Obra 6</div>
-          <div class="gallery-overlay">
-            <div class="gallery-zoom-icon">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-            </div>
-          </div>
+        <div class="about-col-right">
+          <p>
+            El trabajo de Mariano consiste en construir imágenes a partir de la escritura.
+            Toma como punto de partida el caligrama —una forma en la que el texto configura
+            visualmente una imagen— y lo traslada al campo de la pintura contemporánea.
+            Escribe para crear forma y utiliza letras, caligrafías y alfabetos inventados
+            como material estructural: las palabras no solo comunican, también organizan
+            el espacio, generan ritmo y definen composición.
+          </p>
+          <p>
+            Su práctica integra la contundencia gráfica de la Pixação Brasilera, la energía
+            visual de las paredes del conurbano bonaerense y principios formales de la
+            Caligrafía oriental, entendida como disciplina del gesto y control del trazo.
+          </p>
+          <p>
+            Trabaja con acuarelas, plumas de caligrafía, acrílicos, aerosoles y lacas,
+            combinando técnicas tradicionales y recursos urbanos. La superposición de capas,
+            materiales y herramientas refuerza la idea de la escritura como acción física
+            y construcción visual.
+          </p>
+          <p>
+            En síntesis, Mariano pinta escribiendo y convierte la escritura en imagen.
+          </p>
+          <p>
+            Artista Visual. Su trabajo se desarrolla en la convergencia de la indumentaria,
+            el diseño gráfico y la dirección de arte. Ha colaborado con firmas nacionales
+            e internacionales como Converse, Rip Curl, Huawei, Rethink, Cristóbal Colón,
+            Mondelez y Cachafaz.
+          </p>
+          <p>
+            Su trayectoria se define por un cross-over constante entre disciplinas, donde
+            su experiencia como Head of Design en el ámbito de la indumentaria le ha
+            permitido abordar el diseño de producto no solo como una pieza funcional,
+            sino como un soporte de expresión estética y material.
+          </p>
         </div>
 
       </div>
     </section>
 
   </main>
+
+  <!-- =============================================
+       MEYZINE — Suscripción por email
+  ============================================= -->
+  <section class="meyzine-section" aria-label="Suscripción Meyzine">
+    <!-- Título principal de la sección -->
+    <h2 class="meyzine-title">Meyzine</h2>
+    <!-- Subtítulo descriptivo — editable -->
+    <p class="meyzine-subtitle">Dejá tu email y quizá recibas un meyzine</p>
+
+    <!-- Formulario de suscripción -->
+    <!-- Reemplazá el action del form con tu endpoint real (Mailchimp, Brevo, etc.) -->
+    <form class="meyzine-form" action="#" method="POST" onsubmit="handleMeyzineSubmit(event)">
+      <input
+        class="meyzine-input"
+        type="email"
+        name="email"
+        placeholder="tu@email.com"
+        required
+        autocomplete="email"
+        aria-label="Tu dirección de email"
+      />
+      <button class="meyzine-btn" type="submit">Enviar</button>
+    </form>
+  </section>
 
   <!-- =============================================
        FOOTER
@@ -898,15 +1153,6 @@
     <span class="footer-copy">© 2024 Mariano Yoraillh. Todos los derechos reservados.</span>
     <span class="footer-copy">Buenos Aires, Argentina</span>
   </footer>
-
-  <!-- =============================================
-       LIGHTBOX
-  ============================================= -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
-    <button class="lightbox-close" id="lightboxClose">Cerrar</button>
-    <img class="lightbox-img" id="lightboxImg" src="" alt="Obra ampliada" />
-  </div>
-
 
   <!-- =============================================
        JAVASCRIPT
@@ -933,7 +1179,7 @@
     animateCursor();
 
     // El cursor se agranda al pasar sobre elementos interactivos
-    const interactives = document.querySelectorAll('a, button, .gallery-item, .work-card');
+    const interactives = document.querySelectorAll('a, button, .artwork-visual-wrap, .meyzine-input');
     interactives.forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
@@ -975,40 +1221,38 @@
       });
     });
 
-    // ─── LIGHTBOX ─────────────────────────────────────────────────
-    const lightbox      = document.getElementById('lightbox');
-    const lightboxImg   = document.getElementById('lightboxImg');
-    const lightboxClose = document.getElementById('lightboxClose');
-
-    function openLightbox(src, alt) {
-      lightboxImg.src = src;
-      lightboxImg.alt = alt || 'Obra';
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-      setTimeout(() => { lightboxImg.src = ''; }, 350);
-    }
-
-    document.querySelectorAll('.gallery-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const src = item.dataset.src;
-        const alt = item.querySelector('img')?.alt || '';
-        if (src) openLightbox(src, alt);
+    // ─── ANIMACIÓN DE ENTRADA — obras al hacer scroll ─────────────
+    const artworkObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Pequeño delay escalonado según el índice del elemento
+          entry.target.style.transitionDelay = '0s';
+          entry.target.classList.add('visible');
+          artworkObserver.unobserve(entry.target);
+        }
       });
+    }, { threshold: 0.15 });
 
-      // Accesibilidad: abrir con Enter o Space
-      item.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
-      });
+    document.querySelectorAll('.artwork-item').forEach(item => {
+      artworkObserver.observe(item);
     });
 
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+    // ─── MEYZINE FORM ─────────────────────────────────────────────
+    function handleMeyzineSubmit(e) {
+      e.preventDefault();
+      const btn   = e.target.querySelector('.meyzine-btn');
+      const input = e.target.querySelector('.meyzine-input');
+      // Reemplazá esta lógica con tu integración real (Mailchimp, Brevo, fetch a tu API, etc.)
+      btn.textContent = 'Enviado';
+      btn.style.opacity = '0.5';
+      input.value = '';
+      input.placeholder = 'Gracias :)';
+      setTimeout(() => {
+        btn.textContent = 'Enviar';
+        btn.style.opacity = '';
+        input.placeholder = 'tu@email.com';
+      }, 3000);
+    }
   </script>
 
 </body>
