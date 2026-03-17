@@ -882,11 +882,13 @@
       display: none !important;
     }
 
-    .brand-item:hover .brand-logo {
+    .brand-item:hover .brand-logo,
+    .brand-item.hovered .brand-logo {
       display: block;
     }
 
-    .brand-item:hover {
+    .brand-item:hover,
+    .brand-item.hovered {
       background-color: #ffffff;
     }
 
@@ -901,7 +903,8 @@
       transition: color var(--transition);
     }
 
-    .brand-item:hover .brand-name {
+    .brand-item:hover .brand-name,
+    .brand-item.hovered .brand-name {
       display: none;
     }
 
@@ -1307,32 +1310,32 @@
       <div class="brands-grid">
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos LOGOS/ConverseCab-1024x512.jpg" data-brand="Converse" alt="Converse" />
+          <img class="brand-logo" src="images/Fotos%20LOGOS/ConverseCab-1024x512.jpg" data-brand="Converse" alt="Converse" />
           <span class="brand-name">Converse</span>
         </div>
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos LOGOS/Rip-Curl-Logo.jpg" data-brand="Rip Curl" alt="Rip Curl" />
+          <img class="brand-logo" src="images/Fotos%20LOGOS/Rip-Curl-Logo.jpg" data-brand="Rip Curl" alt="Rip Curl" />
           <span class="brand-name">Rip Curl</span>
         </div>
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos LOGOS/Huawei-logo.jpg" data-brand="Huawei" alt="Huawei" />
+          <img class="brand-logo" src="images/Fotos%20LOGOS/Huawei-logo.jpg" data-brand="Huawei" alt="Huawei" />
           <span class="brand-name">Huawei</span>
         </div>
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos LOGOS/rethink.jpg" data-brand="Rethink" alt="Rethink" />
+          <img class="brand-logo" src="images/Fotos%20LOGOS/rethink.jpg" data-brand="Rethink" alt="Rethink" />
           <span class="brand-name">Rethink</span>
         </div>
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos LOGOS/cristobal colon.jpg" data-brand="Cristóbal Colón" alt="Cristóbal Colón" />
+          <img class="brand-logo" src="images/Fotos%20LOGOS/cristobal%20colon.jpg" data-brand="Cristóbal Colón" alt="Cristóbal Colón" />
           <span class="brand-name">Cristóbal Colón</span>
         </div>
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos LOGOS/Cachafaz.jpg" data-brand="Cachafaz" alt="Cachafaz" />
+          <img class="brand-logo" src="images/Fotos%20LOGOS/Cachafaz.jpg" data-brand="Cachafaz" alt="Cachafaz" />
           <span class="brand-name">Cachafaz</span>
         </div>
 
@@ -1486,6 +1489,12 @@
 
     document.querySelectorAll('.artwork-item').forEach(item => {
       artworkObserver.observe(item);
+    });
+
+    // ─── HOVER LOGOS MARCAS (JS backup para cursor:none) ──────────
+    document.querySelectorAll('.brand-item').forEach(item => {
+      item.addEventListener('mouseenter', () => item.classList.add('hovered'));
+      item.addEventListener('mouseleave', () => item.classList.remove('hovered'));
     });
 
     // ─── LIGHTBOX ─────────────────────────────────────────────────
