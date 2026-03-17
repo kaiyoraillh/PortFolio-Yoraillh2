@@ -859,35 +859,35 @@
     }
 
     .brand-item {
-      position: relative;
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       height: 120px;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      transition: border-color var(--transition);
+      transition: background-color 0.25s ease, border-color var(--transition);
     }
 
-    /* Logo: posición absoluta, invisible por defecto — hover manejado por JS */
+    /* Logo: oculto por defecto, aparece en hover */
     .brand-logo {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      display: none;
+      max-width: 75%;
+      max-height: 68px;
+      width: auto;
+      height: auto;
       object-fit: contain;
-      box-sizing: border-box;
-      padding: 22px 28px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
     }
 
-    /* Imagen sin src: no mostrar ícono roto */
     .brand-logo[src=""] {
-      display: none;
+      display: none !important;
+    }
+
+    .brand-item:hover .brand-logo {
+      display: block;
+    }
+
+    .brand-item:hover {
+      background-color: #ffffff;
     }
 
     /* Nombre de marca */
@@ -898,9 +898,11 @@
       text-transform: uppercase;
       color: var(--text);
       text-align: center;
-      position: relative;
-      z-index: 1;
-      transition: opacity 0.3s ease, color var(--transition);
+      transition: color var(--transition);
+    }
+
+    .brand-item:hover .brand-name {
+      display: none;
     }
 
     @media (max-width: 900px) {
@@ -1044,7 +1046,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/YEAHMAN_2.png" alt="Yeah Manja" loading="lazy">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/YEAHMAN_2.png" alt="Yeah Manja">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1061,7 +1063,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/SI_2.png" alt="Si" loading="lazy">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/SI_2.png" alt="Si">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1089,7 +1091,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="images/Fotos PNG Portfolio/quixote_2_no_bg ULTIMA.png" alt="Quixote y Sanxo" loading="lazy">
+              <img class="artwork-img" src="images/Fotos PNG Portfolio/quixote_2_no_bg ULTIMA.png" alt="Quixote y Sanxo">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1106,7 +1108,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/HALCONES_2.png" alt="Halcones y Palomas" loading="lazy">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/HALCONES_2.png" alt="Halcones y Palomas">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1123,7 +1125,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/FOLLOW_2.png" alt="Follow" loading="lazy">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/FOLLOW_2.png" alt="Follow">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1140,7 +1142,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/EL_OUT_2.png" alt="El Out" loading="lazy">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/EL_OUT_2.png" alt="El Out">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1156,7 +1158,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/DISTANT_2.png" alt="Distant" loading="lazy">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/DISTANT_2.png" alt="Distant">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1173,7 +1175,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/CAPTCHA_2.png" alt="Serie Captcha" loading="lazy">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/CAPTCHA_2.png" alt="Serie Captcha">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1190,7 +1192,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="images/Fotos PNG Portfolio/cabecera final.png" alt="Cabecera" loading="lazy">
+              <img class="artwork-img" src="images/Fotos PNG Portfolio/cabecera final.png" alt="Cabecera">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1217,7 +1219,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="images/Fotos PNG Portfolio/bitacoras final.png" alt="R12 / El Muelle" loading="lazy">
+              <img class="artwork-img" src="images/Fotos PNG Portfolio/bitacoras final.png" alt="R12 / El Muelle">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1234,7 +1236,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/ANIS_2.png" alt="Anis" loading="lazy">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/ANIS_2.png" alt="Anis">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1251,7 +1253,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/MAR_PROPIO_2.png" alt="Mar Propio" loading="lazy">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/MAR_PROPIO_2.png" alt="Mar Propio">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1268,7 +1270,7 @@
           </div>
           <div class="artwork-visual">
             <div class="artwork-visual-wrap">
-              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/AD_ANTES_2.png" alt="Ad Antes" loading="lazy">
+              <img class="artwork-img" src="assets/images/Fotos PNG Portfolio/AD_ANTES_2.png" alt="Ad Antes">
               <div class="artwork-hover-overlay"></div>
             </div>
           </div>
@@ -1469,23 +1471,6 @@
       });
     });
 
-    // ─── HOVER DE LOGOS DE MARCAS ──────────────────────────────────
-    // cursor:none puede bloquear CSS :hover en algunos browsers — usamos JS
-    document.querySelectorAll('.brand-item').forEach(item => {
-      const logo = item.querySelector('.brand-logo');
-      if (!logo || logo.getAttribute('src') === '') return;
-      const name = item.querySelector('.brand-name');
-      item.addEventListener('mouseenter', () => {
-        item.style.backgroundColor = '#ffffff';
-        logo.style.opacity = '1';
-        if (name) name.style.opacity = '0';
-      });
-      item.addEventListener('mouseleave', () => {
-        logo.style.opacity = '0';
-        if (name) name.style.opacity = '1';
-        setTimeout(() => { item.style.backgroundColor = ''; }, 300);
-      });
-    });
 
     // ─── ANIMACIÓN DE ENTRADA — obras al hacer scroll ─────────────
     const artworkObserver = new IntersectionObserver((entries) => {
