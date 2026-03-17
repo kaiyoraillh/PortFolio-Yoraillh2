@@ -840,6 +840,7 @@
       min-height: 100vh;
       padding: 60px 0 50px;
       justify-content: flex-start;
+      border-top: none;
     }
 
     #experience .section-label {
@@ -859,37 +860,43 @@
     }
 
     .brand-item {
+      position: relative;
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       height: 120px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 0.25s ease, border-color var(--transition);
+      transition: border-color var(--transition);
     }
 
-    /* Logo: oculto por defecto, aparece en hover */
+    /* Wrapper: cubre el cuadro entero, fondo blanco + logo como una unidad */
+    .brand-logo-wrap {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 28px;
+      box-sizing: border-box;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .brand-item:hover .brand-logo-wrap,
+    .brand-item.hovered .brand-logo-wrap {
+      opacity: 1;
+    }
+
     .brand-logo {
-      display: none;
-      max-width: 75%;
-      max-height: 68px;
+      max-width: 100%;
+      max-height: 64px;
       width: auto;
       height: auto;
       object-fit: contain;
-    }
-
-    .brand-logo[src=""] {
-      display: none !important;
-    }
-
-    .brand-item:hover .brand-logo,
-    .brand-item.hovered .brand-logo {
       display: block;
-    }
-
-    .brand-item:hover,
-    .brand-item.hovered {
-      background-color: #ffffff;
     }
 
     /* Nombre de marca */
@@ -900,12 +907,12 @@
       text-transform: uppercase;
       color: var(--text);
       text-align: center;
-      transition: color var(--transition);
+      transition: opacity 0.25s ease, color var(--transition);
     }
 
     .brand-item:hover .brand-name,
     .brand-item.hovered .brand-name {
-      display: none;
+      opacity: 0;
     }
 
     @media (max-width: 900px) {
@@ -1310,32 +1317,44 @@
       <div class="brands-grid">
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos%20LOGOS/converse-new1270.jpg" data-brand="Converse" alt="Converse" />
+          <div class="brand-logo-wrap">
+            <img class="brand-logo" src="images/Fotos%20LOGOS/ConverseCab-1024x512.jpg" data-brand="Converse" alt="Converse" />
+          </div>
           <span class="brand-name">Converse</span>
         </div>
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos%20LOGOS/Ripcurl.jpg" data-brand="Rip Curl" alt="Rip Curl" />
+          <div class="brand-logo-wrap">
+            <img class="brand-logo" src="images/Fotos%20LOGOS/Ripcurl.jpg" data-brand="Rip Curl" alt="Rip Curl" />
+          </div>
           <span class="brand-name">Rip Curl</span>
         </div>
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos%20LOGOS/Huawei-logo.jpg" data-brand="Huawei" alt="Huawei" />
+          <div class="brand-logo-wrap">
+            <img class="brand-logo" src="images/Fotos%20LOGOS/Huawei-logo.jpg" data-brand="Huawei" alt="Huawei" />
+          </div>
           <span class="brand-name">Huawei</span>
         </div>
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos%20LOGOS/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(8).png" data-brand="Rethink" alt="Rethink" />
+          <div class="brand-logo-wrap">
+            <img class="brand-logo" src="images/Fotos%20LOGOS/rethink.jpg" data-brand="Rethink" alt="Rethink" />
+          </div>
           <span class="brand-name">Rethink</span>
         </div>
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos%20LOGOS/Dise%C3%B1o%20sin%20t%C3%ADtulo.jpg" data-brand="Cristóbal Colón" alt="Cristóbal Colón" />
+          <div class="brand-logo-wrap">
+            <img class="brand-logo" src="images/Fotos%20LOGOS/cristobal%20colon.jpg" data-brand="Cristóbal Colón" alt="Cristóbal Colón" />
+          </div>
           <span class="brand-name">Cristóbal Colón</span>
         </div>
 
         <div class="brand-item">
-          <img class="brand-logo" src="images/Fotos%20LOGOS/Logo%20Cachafaz.jpg" data-brand="Cachafaz" alt="Cachafaz" />
+          <div class="brand-logo-wrap">
+            <img class="brand-logo" src="images/Fotos%20LOGOS/Logo%20Cachafaz.jpg" data-brand="Cachafaz" alt="Cachafaz" />
+          </div>
           <span class="brand-name">Cachafaz</span>
         </div>
 
